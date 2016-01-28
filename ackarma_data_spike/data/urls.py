@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from data.views import home
+from data.views import home, player
 
 urlpatterns = [
-    url(r'', home),
+    url(r'player/(?P<player_pk>[0-9]+)', player),
+    url(r'players', home),
 ]

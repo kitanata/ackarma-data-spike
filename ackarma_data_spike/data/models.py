@@ -38,7 +38,7 @@ class Gamestat(models.Model):
     fic = models.DecimalField(max_digits=3, decimal_places=1)
     w_l = models.CharField(max_length=1)
     drb = models.IntegerField()
-    player = models.ForeignKey('data.Player', db_column='player_id')
+    player = models.ForeignKey('data.Player', db_column='player_id', related_name='stats')
     ast = models.IntegerField()
     field_min = models.IntegerField(db_column='_min')  # Field renamed because it started with '_'.
     team = models.CharField(max_length=13)
@@ -107,7 +107,7 @@ class Player(models.Model):
 
     def fanduel_avg_total(self):
         NUM_GAMES = 10
-        games = self.gamestat_set.all()[:NUM_GAMES]
+        games = self.stats.all()[:NUM_GAMES]
         summation = 0
 
         for game in games:
