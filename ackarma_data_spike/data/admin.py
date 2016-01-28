@@ -47,21 +47,28 @@ class GamestatAdmin(admin.ModelAdmin):
         ('player',)
     )
 
+    # def get_queryset(request):
+
+
 
 class PlayerAdmin(admin.ModelAdmin):
     list_display = (
-        '__str__',
+        'name',
         'number',
         'yos',
         'pos',
         'height',
         'draft_status',
-        'player',
         'age',
         'current_team',
         'nationality',
         'weight',
-        'pre_draft_team'
+        'pre_draft_team',
+        'fanduel_avg_total'
+    )
+
+    search_fields = (
+        'name',
     )
 
 

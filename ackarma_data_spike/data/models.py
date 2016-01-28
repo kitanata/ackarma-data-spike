@@ -88,6 +88,7 @@ class Gamestat(models.Model):
         ))
 
     class Meta:
+        ordering = ['-field_date']
         db_table = 'gamestats'
 
 
@@ -97,12 +98,26 @@ class Player(models.Model):
     pos = models.IntegerField()
     height = models.IntegerField()
     draft_status = models.DecimalField(max_digits=7, decimal_places=3)
-    player = models.CharField(max_length=25)
+    name = models.CharField(max_length=25)
     age = models.IntegerField()
     current_team = models.CharField(max_length=22)
     nationality = models.CharField(max_length=32)
     weight = models.IntegerField()
     pre_draft_team = models.CharField(max_length=60)
+
+    def fanduel_avg_total(self):
+        NUM_GAMES = 10
+        games = self.gamestat_set.all()[:NUM_GAMES]
+        summation = 0
+
+        for game in games:
+            summation += game.fanduel_points_total()
+
+        avg = summation / NUM_GAMES
+        return avg
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'players'
