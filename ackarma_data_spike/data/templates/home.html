@@ -10,6 +10,16 @@
         {{div_a|safe}}
         {{div_b|safe}}
 
+        <h1> Positions </h1>
+        <ul>
+            {% for p in positions %}
+                <li><a href="/data/position/{{p.pk}}">{{p}}</a></li>
+            {% endfor %}
+        </ul>
+
+
+        <h1> Players </h1>
+
         <ul>
             {% for p in players %}
                 <li><a href="/data/player/{{p.pk}}">{{p.name}}</a></li>
