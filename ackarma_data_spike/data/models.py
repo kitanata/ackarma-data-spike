@@ -87,11 +87,7 @@ class Gamestat(models.Model):
             self.fanduel_turnover()
         ))
 
-    def __str__(self):
-        return self.pk
-
     class Meta:
-        managed = False
         db_table = 'gamestats'
 
 
@@ -108,9 +104,5 @@ class Player(models.Model):
     weight = models.IntegerField()
     pre_draft_team = models.CharField(max_length=60)
 
-    def __str__(self):
-        return '{}'.format(self.player)
-
     class Meta:
-        managed = False
         db_table = 'players'
