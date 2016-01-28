@@ -24,7 +24,7 @@ FANDUEL_ADJUSTMENTS = {
 
 class Gamestat(models.Model):
     fgm = models.IntegerField()
-    pos = models.IntegerField()
+    pos = models.ForeignKey('data.Position', db_column='pos')
     fg_field = models.DecimalField(db_column='fg_', max_digits=4, decimal_places=3)  # Field renamed because it ended with '_'.
     pf = models.IntegerField()
     field_3pm = models.IntegerField(db_column='_3pm')  # Field renamed because it started with '_'.
@@ -95,7 +95,7 @@ class Gamestat(models.Model):
 class Player(models.Model):
     number = models.IntegerField()
     yos = models.IntegerField()
-    pos = models.IntegerField()
+    pos = models.ForeignKey('data.Position', db_column='pos')
     height = models.IntegerField()
     draft_status = models.DecimalField(max_digits=7, decimal_places=3)
     name = models.CharField(max_length=25)
@@ -121,3 +121,12 @@ class Player(models.Model):
 
     class Meta:
         db_table = 'players'
+
+
+class Position(models.Model):
+    id = models.IntegerField(primary_key=True)
+    short_name = models.CharField(max_length=5)
+    long_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.long_name
