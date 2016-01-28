@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Players, Gamestats
+from .models import Player, Gamestat
 
 
-class GamestatsAdmin(admin.ModelAdmin):
+class GamestatAdmin(admin.ModelAdmin):
     list_display = (
         'player',
         'field_date', 'team', 'opponent', 'w_l', 'status',
@@ -17,7 +17,7 @@ class GamestatsAdmin(admin.ModelAdmin):
     )
 
 
-class PlayersAdmin(admin.ModelAdmin):
+class PlayerAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
         'number',
@@ -34,5 +34,5 @@ class PlayersAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Gamestats, GamestatsAdmin)
-admin.site.register(Players, PlayersAdmin)
+admin.site.register(Gamestat, GamestatAdmin)
+admin.site.register(Player, PlayerAdmin)

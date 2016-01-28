@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class Gamestats(models.Model):
+class Gamestat(models.Model):
     fgm = models.IntegerField()
     pos = models.IntegerField()
     fg_field = models.DecimalField(db_column='fg_', max_digits=4, decimal_places=3)  # Field renamed because it ended with '_'.
@@ -26,7 +26,7 @@ class Gamestats(models.Model):
     fic = models.DecimalField(max_digits=3, decimal_places=1)
     w_l = models.CharField(max_length=1)
     drb = models.IntegerField()
-    player = models.ForeignKey('data.Players', db_column='player_id')
+    player = models.ForeignKey('data.Player', db_column='player_id')
     ast = models.IntegerField()
     field_min = models.IntegerField(db_column='_min')  # Field renamed because it started with '_'.
     team = models.CharField(max_length=13)
@@ -44,7 +44,7 @@ class Gamestats(models.Model):
         db_table = 'gamestats'
 
 
-class Players(models.Model):
+class Player(models.Model):
     number = models.IntegerField()
     yos = models.IntegerField()
     pos = models.IntegerField()
