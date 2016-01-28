@@ -10,37 +10,56 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class OneSix(models.Model):
-    field_date = models.DateTimeField(db_column='_date')  # Field renamed because it started with '_'.
-    team = models.CharField(max_length=300)
-    opponent = models.CharField(max_length=300)
-    w_l = models.CharField(max_length=1)
-    status = models.CharField(max_length=7)
-    pos = models.CharField(max_length=2)
-    field_min = models.CharField(db_column='_min', max_length=5)  # Field renamed because it started with '_'.
+class Gamestats(models.Model):
     fgm = models.IntegerField()
-    fga = models.IntegerField()
-    fg_field = models.FloatField(db_column='fg_')  # Field renamed because it ended with '_'.
+    pos = models.IntegerField()
+    fg_field = models.DecimalField(db_column='fg_', max_digits=4, decimal_places=3)  # Field renamed because it ended with '_'.
+    pf = models.IntegerField()
     field_3pm = models.IntegerField(db_column='_3pm')  # Field renamed because it started with '_'.
-    field_3pa = models.IntegerField(db_column='_3pa')  # Field renamed because it started with '_'.
-    field_3p_field = models.FloatField(db_column='_3p_')  # Field renamed because it started with '_'. Field renamed because it ended with '_'.
-    ftm = models.IntegerField()
-    fta = models.IntegerField()
-    ft_field = models.FloatField(db_column='ft_')  # Field renamed because it ended with '_'.
-    orb = models.IntegerField()
-    drb = models.IntegerField()
-    reb = models.IntegerField()
-    ast = models.IntegerField()
+    status = models.CharField(max_length=7)
     stl = models.IntegerField()
+    opponent = models.CharField(max_length=16)
+    tov = models.IntegerField()
+    orb = models.IntegerField()
+    field_date = models.DateTimeField(db_column='_date')  # Field renamed because it started with '_'.
+    fta = models.IntegerField()
+    fic = models.DecimalField(max_digits=3, decimal_places=1)
+    w_l = models.CharField(max_length=1)
+    drb = models.IntegerField()
+    player = models.ForeignKey('data.Players', db_column='player_id')
+    ast = models.IntegerField()
+    field_min = models.IntegerField(db_column='_min')  # Field renamed because it started with '_'.
+    team = models.CharField(max_length=13)
     blk = models.IntegerField()
     pts = models.IntegerField()
-    fic = models.FloatField()
-    pf = models.IntegerField()
-    tov = models.IntegerField()
-    
-    def __str__(self):
-        return '{}'.format(self.pk)
+    fga = models.IntegerField()
+    ft_field = models.DecimalField(db_column='ft_', max_digits=4, decimal_places=3)  # Field renamed because it ended with '_'.
+    ftm = models.IntegerField()
+    field_3p_field = models.DecimalField(db_column='_3p_', max_digits=4, decimal_places=3)  # Field renamed because it started with '_'. Field renamed because it ended with '_'.
+    field_3pa = models.IntegerField(db_column='_3pa')  # Field renamed because it started with '_'.
+    reb = models.IntegerField()
 
     class Meta:
         managed = False
-        db_table = 'one_six'
+        db_table = 'gamestats'
+
+
+class Players(models.Model):
+    number = models.IntegerField()
+    yos = models.IntegerField()
+    pos = models.IntegerField()
+    height = models.IntegerField()
+    draft_status = models.DecimalField(max_digits=7, decimal_places=3)
+    player = models.CharField(max_length=25)
+    age = models.IntegerField()
+    current_team = models.CharField(max_length=22)
+    nationality = models.CharField(max_length=32)
+    weight = models.IntegerField()
+    pre_draft_team = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.player
+
+    class Meta:
+        managed = False
+        db_table = 'players'
