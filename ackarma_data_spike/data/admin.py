@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Player, Gamestat
+from .models import *
 
 
 class GamestatAdmin(admin.ModelAdmin):
@@ -47,9 +47,6 @@ class GamestatAdmin(admin.ModelAdmin):
         ('player',)
     )
 
-    # def get_queryset(request):
-
-
 
 class PlayerAdmin(admin.ModelAdmin):
     list_display = (
@@ -74,3 +71,4 @@ class PlayerAdmin(admin.ModelAdmin):
 
 admin.site.register(Gamestat, GamestatAdmin)
 admin.site.register(Player, PlayerAdmin)
+admin.site.register(Position)
