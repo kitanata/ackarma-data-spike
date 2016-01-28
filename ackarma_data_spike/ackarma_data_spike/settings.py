@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'ackarma_data_spike.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ackarma-data-spike',
+        'NAME': 'ackarmadata',
     }
 }
 
