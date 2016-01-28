@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from data.views import home, player, position
+from data.views import positions, player, position
 
 urlpatterns = [
     url(r'player/(?P<player_pk>[0-9]+)', player),
     url(r'position/(?P<position_pk>[0-9]+)', position),
-    url(r'players', home),
+    url(r'positions', positions),
 ]

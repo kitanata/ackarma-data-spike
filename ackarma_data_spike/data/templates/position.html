@@ -14,5 +14,13 @@
 
     {{div_a|safe}}
     {{div_b|safe}}
+
+    <h1> Players </h1>
+
+    <ul>
+        {% for p in players %}
+            <li><a href="/data/player/{{p.pk}}">{{p.name}}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html> 

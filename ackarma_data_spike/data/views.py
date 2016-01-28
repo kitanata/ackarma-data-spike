@@ -9,8 +9,7 @@ from django.shortcuts import render, get_object_or_404
 
 from data.models import Gamestat, Player, Position
 
-def home(request):
-    players = list(Player.objects.all())
+def positions(request):
     positions = list(Position.objects.all())
     stats = list(Gamestat.objects.all())
 
@@ -38,8 +37,7 @@ def home(request):
     script_a, div_a = components(plot)
     script_b, div_b = components(plot2)
 
-    return render(request, 'home.html', {
-        'players': players,
+    return render(request, 'positions.html', {
         'positions': positions,
         "script_a": script_a, 
         "div_a": div_a,
@@ -49,6 +47,7 @@ def home(request):
 
 def position(request, position_pk):
     position = get_object_or_404(Position, pk=position_pk)
+    players = list(position.players.all())
 
     stats = list(position.stats.all())
     rebounds = list(map(lambda x: x.reb, stats))
@@ -76,6 +75,7 @@ def position(request, position_pk):
     script_b, div_b = components(plot2)
 
     return render(request, "position.html", {
+        'players': players,
         "position": position,
         "script_a": script_a, 
         "div_a": div_a,
