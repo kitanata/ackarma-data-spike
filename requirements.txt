@@ -3,6 +3,7 @@ data-dispenser==0.2.5.1
 dateutils==0.6.6
 ddlgenerator==0.1.9
 Django==1.9.1
+django-grappelli==2.7.3
 psycopg2==2.6.1
 pymongo==3.2
 python-dateutil==2.4.2
