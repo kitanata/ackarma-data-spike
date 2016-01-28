@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from data.views import home
+
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include('data.urls')),
+    url(r'', home),
 ]
